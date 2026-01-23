@@ -33,7 +33,7 @@ const { rateLimit } = require("express-rate-limit");
   });
 
 app.use(cors({
-    origin: "http://localhost:3000",  // tumhara frontend URL
+    origin: "*",  // tumhara frontend URL
     credentials: true,               // cookies allow karne ke liye
 }));
 
