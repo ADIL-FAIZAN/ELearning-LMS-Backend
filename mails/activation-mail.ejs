@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Welcome Email</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .header {
+            text-align: center;
+            background: #4f46e5;
+            padding: 20px 0;
+            color: #ffffff;
+            border-radius: 12px 12px 0 0;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 25px;
+            font-size: 16px;
+            color: #374151;
+            line-height: 1.7;
+        }
+
+        .code-box {
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .activation-code {
+            font-size: 32px;
+            font-weight: bold;
+            color: #111827;
+            letter-spacing: 4px;
+            background: #e0e7ff;
+            padding: 15px 25px;
+            display: inline-block;
+            border-radius: 8px;
+        }
+
+        .footer {
+            margin-top: 25px;
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+
+        <div class="header">
+            Welcome to E-Learning
+        </div>
+
+        <div class="content">
+            <p>Hello <strong><%= name %></strong>,</p>
+
+            <p>
+                Thanks for registering on our platform!  
+                We’re excited to have you here.
+            </p>
+
+            <p>Please use the following activation code to verify your account:</p>
+
+            <div class="code-box">
+                <div class="activation-code"><%= activationCode %></div>
+            </div>
+
+            <p>
+                Please enter this code on the activation page within the next 
+                <strong>5 minutes</strong>.
+            </p>
+
+            <p>If you didn’t request this email, you can safely ignore it.</p>
+        </div>
+
+        <div class="footer">
+            © E-Learning Platform — 2025  
+        </div>
+
+    </div>
+</body>
+</html>
