@@ -22,7 +22,6 @@ const initSocketServer = require("./SocketServer");
 const { rateLimit } = require("express-rate-limit");
 
 
-
   // Cloudinary config
   cloudinary.config({
     
@@ -33,7 +32,7 @@ const { rateLimit } = require("express-rate-limit");
   });
 
 app.use(cors({
-    origin: "*",  // tumhara frontend URL
+    origin: "https://e-learning-lms-frontend-ss97.vercel.app",  // tumhara frontend URL
     credentials: true,               // cookies allow karne ke liye
 }));
 
