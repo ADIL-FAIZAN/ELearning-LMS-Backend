@@ -27,7 +27,7 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET,
 });
 app.use(cors({
-    origin: "http://localhost:3000", // tumhara frontend URL
+    origin: "https://e-learning-lms-frontend-ss97.vercel.app", // tumhara frontend URL
     credentials: true, // cookies allow karne ke liye
 }));
 //Api Request Limit 

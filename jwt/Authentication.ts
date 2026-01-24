@@ -18,8 +18,8 @@ export const sendToken = (User:UserInterface, statusCode:number, res:Response) =
         expires:Date,
         maxAge: number,
         httpOnly: boolean,
-        sameSite: "lax" | "strict" | "none" | undefined,
-        secure?: boolean
+        sameSite: "none",
+        secure: true
         
  };   
         
@@ -28,8 +28,8 @@ export const sendToken = (User:UserInterface, statusCode:number, res:Response) =
         expires: new Date(Date.now() + AccessTokenExpire * 60 * 1000),
         maxAge:  AccessTokenExpire * 60 * 1000,
         httpOnly: true,
-        sameSite: "lax",
-
+        sameSite: "none",
+        secure:true
  };
     
    const RefreshTokenOptions:CookiesOptionsInterface = {
@@ -37,8 +37,8 @@ export const sendToken = (User:UserInterface, statusCode:number, res:Response) =
         expires: new Date(Date.now() + RefreshTokenExpire * 24 * 60 * 60 * 1000),
         maxAge: RefreshTokenExpire * 24 * 60 * 60 * 1000,
         httpOnly: true,
-        sameSite: "lax",
- 
+        sameSite: "none",
+        secure:true
     };
    
     res.cookie("access_token", AccessToken, AccessTokenOptions);

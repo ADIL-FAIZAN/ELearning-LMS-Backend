@@ -23,7 +23,6 @@ router.post("/create-course", UpdateAccessToken, isUserAuthenticated, isAdmin, a
     try {
         const CourseData = req.body;
         const courseThumbnail = CourseData.thumbnail;
-        console.log("Create Course Request Body:", CourseData);
         if (courseThumbnail) {
             const myCloud = await cloudinary.v2.uploader.upload(courseThumbnail, {
                 folder: "Courses",
@@ -36,6 +35,8 @@ router.post("/create-course", UpdateAccessToken, isUserAuthenticated, isAdmin, a
         }
         const newCourse = new Course(CourseData);
         await newCourse.save();
+        const AllCourses = await Course.find().select("-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links");
+        redis.set("AllCourses", JSON.stringify(AllCourses));
         res
             .status(201)
             .json({ message: "New Course Upload Successfully", success: true });
@@ -67,6 +68,8 @@ router.put("/edit-course/:id", UpdateAccessToken, isUserAuthenticated, isAdmin, 
             await redis.set(req.params.id.toString(), JSON.stringify(course), "EX", 604800);
         }
         ;
+        const AllCourses = await Course.find().select("-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links");
+        redis.set("AllCourses", JSON.stringify(AllCourses));
         res.status(201).json({
             message: "Course Data Update Successfully",
             success: true,
@@ -390,6 +393,8 @@ router.delete("/delete-course/:id", UpdateAccessToken, isUserAuthenticated, isAd
         ;
         let course = await Course.findByIdAndDelete(id);
         await redis.del(course._id);
+        const AllCourses = await Course.find().select("-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links");
+        redis.set("AllCourses", JSON.stringify(AllCourses));
         res.status(201).json({ message: "Course Deleted Successfully", course });
     }
     catch (err) {

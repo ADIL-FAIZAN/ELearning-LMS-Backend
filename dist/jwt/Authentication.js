@@ -14,13 +14,15 @@ const sendToken = (User, statusCode, res) => {
         expires: new Date(Date.now() + AccessTokenExpire * 60 * 1000),
         maxAge: AccessTokenExpire * 60 * 1000,
         httpOnly: true,
-        sameSite: "lax",
+        sameSite: "none",
+        secure: true
     };
     const RefreshTokenOptions = {
         expires: new Date(Date.now() + RefreshTokenExpire * 24 * 60 * 60 * 1000),
         maxAge: RefreshTokenExpire * 24 * 60 * 60 * 1000,
         httpOnly: true,
-        sameSite: "lax",
+        sameSite: "none",
+        secure: true
     };
     res.cookie("access_token", AccessToken, AccessTokenOptions);
     res.cookie("refresh_token", RefreshToken, RefreshTokenOptions);

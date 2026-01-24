@@ -602,6 +602,15 @@ router.delete("/delete-course/:id",UpdateAccessToken,isUserAuthenticated,isAdmin
     let course = await Course.findByIdAndDelete(id);
     await redis.del(course._id);
 
+      const AllCourses = await Course.find().select(
+          "-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links"
+        );
+
+    redis.set("AllCourses", JSON.stringify(AllCourses) as any);
+
+
+
+
     res.status(201).json({ message: "Course Deleted Successfully", course});
 
   } catch(err: any){
