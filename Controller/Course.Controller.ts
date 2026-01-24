@@ -22,12 +22,10 @@ router.post(
   isUserAuthenticated,
   isAdmin,
   async (req: Request, res: Response, next: NextFunction) => {
+
     try {
       const CourseData = req.body;
       const courseThumbnail = CourseData.thumbnail;
-
-
-      console.log("Create Course Request Body:",CourseData);
 
       if (courseThumbnail) {
         const myCloud = await cloudinary.v2.uploader.upload(courseThumbnail, {
@@ -43,6 +41,13 @@ router.post(
 
       const newCourse = new Course(CourseData);
       await newCourse.save();
+
+        const AllCourses = await Course.find().select(
+          "-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links"
+        );
+
+        redis.set("AllCourses", JSON.stringify(AllCourses) as any);
+
 
       res
         .status(201)
@@ -93,6 +98,13 @@ router.put(
         await redis.set(req.params.id.toString(),JSON.stringify(course),"EX",604800);
 
       };
+
+      const AllCourses = await Course.find().select(
+      "-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links"
+      );
+
+        redis.set("AllCourses", JSON.stringify(AllCourses) as any);
+
 
 
       res.status(201).json({
@@ -185,10 +197,10 @@ router.get("/get-All-Courses-user", async (req: Request, res: Response, next: Ne
           message: "All Courses Fetched Succesfully",
           AllCoursesData: JSON.parse(CachedExist),
         });
+
       } else {
-        const AllCourses = await Course.find().select(
-          "-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links"
-        );
+  
+  const AllCourses = await Course.find().select("-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links");
 
         redis.set("AllCourses", JSON.stringify(AllCourses) as any);
         res.status(201).json({
