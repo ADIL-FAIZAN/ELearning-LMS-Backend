@@ -51,9 +51,9 @@ app.use(express.json({ limit: "10mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 
-// app.get("/test", (req:Request, res:Response,next:NextFunction) => {
-//   res.send("Hello world!");
-// });
+app.get("/test", (req:Request, res:Response,next:NextFunction) => {
+  res.send("Hello world From Adil!");
+});
 
     
 initSocketServer(server);
