@@ -1,5 +1,4 @@
 {
-
   "compilerOptions": {
     "target": "ES2020",
     "module": "CommonJS",
@@ -9,9 +8,10 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "rootDir":"../backend",
-    "outDir": "./dist"
+
+    "rootDir": ".",
+    "outDir": "dist"
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
