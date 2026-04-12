@@ -100,7 +100,7 @@ export async function UpdateAccessToken(req: Request, res: Response, next: NextF
  try {
   
   const {refresh_token} = req.cookies;
-
+   
   const decoded = jwt.verify(refresh_token,process.env.RefreshToken!);  
     
   if (!decoded) {
@@ -139,7 +139,8 @@ export async function UpdateAccessToken(req: Request, res: Response, next: NextF
         expires: new Date(Date.now() + AccessTokenExpire * 60 * 1000),
         maxAge:  AccessTokenExpire * 60 * 1000,
         httpOnly: true,
-        sameSite: "lax",
+        sameSite: "none",
+        secure:true
 
     };
     
@@ -148,7 +149,8 @@ export async function UpdateAccessToken(req: Request, res: Response, next: NextF
         expires: new Date(Date.now() + RefreshTokenExpire * 24 * 60 * 60 * 1000),
         maxAge: RefreshTokenExpire * 24 * 60 * 60 * 1000,
         httpOnly: true,
-        sameSite: "lax",
+        sameSite: "none",
+        secure:true
  
     };
     
@@ -164,7 +166,5 @@ export async function UpdateAccessToken(req: Request, res: Response, next: NextF
   return next(new ErrorHandler(err.message, 500));
   
   };
-
-
 
 }
