@@ -52,6 +52,8 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 
 app.get("/test", (req:Request, res:Response,next:NextFunction) => {
+ 
+  console.log("DEPLOY TEST FIX 1");
   res.send("Hello world From Rana Adil!");
 });
 
