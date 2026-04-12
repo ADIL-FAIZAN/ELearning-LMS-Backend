@@ -52,7 +52,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 
 app.get("/test", (req:Request, res:Response,next:NextFunction) => {
-  res.send("Hello world From Adil!");
+  res.send("Hello world From Rana Adil!");
 });
 
     
