@@ -271,7 +271,7 @@ router.get("/refresh-user-token", async (req: Request, res: Response, next: Next
 
                                             //Get User By Id
 
-router.get("/get-login-user-info",isUserAuthenticated, async (req: Request, res: Response, next: NextFunction) => {
+router.get("/get-login-user-info",UpdateAccessToken,isUserAuthenticated, async (req: Request, res: Response, next: NextFunction) => {
   
   try {
   
