@@ -164,13 +164,25 @@ router.post("/login-user", async (req: Request, res: Response, next: NextFunctio
 
                                      //Log out User
 
-router.get("/logout",isUserAuthenticated,async (req: Request, res: Response, next: NextFunction) => {
+router.get("/logout",UpdateAccessToken,isUserAuthenticated,async (req: Request, res: Response, next: NextFunction) => {
   
   try {
   
   await redis.del((req as any).user?._id);
-  res.cookie("access_token", "", {maxAge:1});
-  res.cookie("refresh_token", "", {maxAge:1});
+      
+  res.cookie("access_token", "", {
+  httpOnly: true,
+  expires: new Date(0),
+  sameSite: "none",
+  secure: true,
+});
+
+res.cookie("refresh_token", "", {
+  httpOnly: true,
+  expires: new Date(0),
+  sameSite: "none",
+  secure: true,
+});
 
   res.status(201).json({ success: true, message: "LogOut Successfull!"});
     
