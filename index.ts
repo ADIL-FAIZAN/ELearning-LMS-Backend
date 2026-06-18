@@ -34,7 +34,7 @@ const { rateLimit } = require("express-rate-limit");
 console.log("SERVER JUST RESTARTED 🔥");
 
 app.use(cors({
-    origin: "https://e-learning-lms-frontend-ss97-9lg5tp5lb-adilfaizans-projects.vercel.app",  // tumhara frontend URL
+    origin: "https://e-learning-lms-frontend-ss97.vercel.app",  // tumhara frontend URL
     credentials: true,               // cookies allow karne ke liye
 }));
 
